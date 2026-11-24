@@ -33,6 +33,14 @@ use crate::{
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    if std::env::args()
+        .skip(1)
+        .any(|arg| arg == "--version" || arg == "-V")
+    {
+        println!("cassette {}", env!("CARGO_PKG_VERSION"));
+        return Ok(());
+    }
+
     log::init();
     crate::cassette_log!(
         "INFO",
